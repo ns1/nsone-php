@@ -1,0 +1,38 @@
+{
+    "name": "nsone/nsone-php",
+    "type": "library",
+    "description": "A PHP SDK for accessing NSONE, the Data Driven DNS platform.",
+    "keywords": ["dns", "client", "rest", "web service"],
+    "homepage": "http://nsone.net/",
+    "license": "MIT",
+
+    "authors": [
+        {
+            "name": "Shannon Weyrick",
+            "email": "sweyrick@nsone.net",
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/nsone/nsone-php/issues"
+        "source": "https://github.com/nsone/nsone-php"
+    },
+    "require": {
+        "php": ">=5.4.0",
+        "guzzle/guzzle": ">=3.7.0,<=3.9.9"
+    },
+
+    "suggest": { 
+    },
+    "autoload": {
+        "psr-4": {
+            "NSONE\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "phpunit/phpunit": "4.*"
+    },
+    "require-dev": {
+    },
+    "extra": {
+    }
+}
