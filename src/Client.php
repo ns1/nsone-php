@@ -13,9 +13,5 @@ class Client
 
     const VERSION = "0.1";
 
-    public function testing() {
-        print "hey there!\n";
-    }
-
 }
 
