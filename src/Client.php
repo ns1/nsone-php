@@ -9,6 +9,8 @@
 namespace NSONE;
 
 use NSONE\Config;
+use NSONE\Zone;
+use NSONE\Record;
 
 class Client
 {
@@ -40,6 +42,36 @@ class Client
     }
     public function records() {
         return new Rest\Records($this->config);
+    }
+    public function datasource() {
+        return new Rest\DataSource($this->config);
+    }
+    public function datafeed() {
+        return new Rest\DataFeed($this->config);
+    }
+
+    /**
+     * high level interface
+     */
+    public function loadZone($zone) {
+        $zoneH = new Zone($this->config, $zone);
+        $zoneH->load();
+        return $zoneH;
+    }
+
+    public function createZone($zone, $options) {
+        $zoneH = new Zone($this->config, $zone);
+        $zoneH->create($options);
+        return $zoneH;
+    }
+
+    public function loadRecord($domain, $type, $zone=NULL) {
+        if (empty($zone)) {
+            $zone = substr($domain, strpos($domain, '.') + 1);
+        }
+        $zoneH = new Zone($this->config, $zone);
+        $zoneH->loadRecord($domain, $type);
+        return $zoneH;
     }
 
 }

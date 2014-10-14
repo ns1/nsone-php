@@ -8,7 +8,9 @@
 
 namespace NSONE;
 
-class Config implements \ArrayAccess
+use NSONE\DataObject;
+
+class Config extends DataObject
 {
 
     const ENDPOINT = 'api.nsone.net';
@@ -23,10 +25,9 @@ class Config implements \ArrayAccess
 
     protected $keyID = NULL;
 
-    protected $data = array();
-
     public function __construct($path = NULL) {
 
+        parent::__construct();
         if ($path) {
             $this->loadFromFile($path);
         }
@@ -132,25 +133,6 @@ class Config implements \ArrayAccess
     
     }
 
-    public function dump($return=false) {
-        print_r($this->data, $return);
-    }
-    
-    public function offsetSet($offset, $value) {
-        $this->data[$offset] = $value;
-    }
-    
-    public function offsetExists($offset) {
-        return isset($this->data[$offset]);
-    }
-
-    public function offsetUnset($offset) {
-        unset($this->data[$offset]);
-    }
-
-    public function offsetGet($offset) {
-        return $this->data[$offset];
-    }
 }
 
 
