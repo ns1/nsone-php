@@ -17,9 +17,9 @@ class BaseResource {
 
     static protected $transport = NULL;
 
-    protected $INT_FIELDS = array();
-    protected $BOOL_FIELDS = array();
-    protected $PASSTHRU_FIELDS = array();
+    public $INT_FIELDS = array();
+    public $BOOL_FIELDS = array();
+    public $PASSTHRU_FIELDS = array();
 
     public function __construct(\NSONE\Config $config) {
         $this->config = $config;
@@ -27,7 +27,7 @@ class BaseResource {
             self::$transport = new CurlTransport($this->config);
     }
 
-    public function buildStdBody($body, $fields) {
+    public function buildStdBody(&$body, $fields) {
         foreach ($this->BOOL_FIELDS as $f) {
             if (isset($fields[$f]))
                 $body[$f] = (bool)$fields[$f];

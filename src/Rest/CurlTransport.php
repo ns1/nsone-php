@@ -53,9 +53,15 @@ class CurlTransport extends Transport {
             curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
         }
 
+        if (!empty($body) && is_array($body)) {
+            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($body));
+            $options['headers'][] = 'Content-Type: application/json';
+        }
+
         if (!empty($options['headers'])) {
             curl_setopt($curl, CURLOPT_HTTPHEADER, $options['headers']);
         }
+
 
         if (@$this->config['verbosity'] > 2)
             curl_setopt($curl, CURLINFO_HEADER_OUT, true);
@@ -81,6 +87,9 @@ class CurlTransport extends Transport {
             $data = preg_replace('/X-NSONE-Key: (.+)$/m', 'X-NSONE-Key: <redacted>', $data);
             echo "---------------------------request start-------------------------\n";
             echo "WRITE: [$data]\n";
+            if ($body) {
+                echo "BODY: [".json_encode($body)."]\n";
+            }
             echo "READ : [$this->readBuf]\n";
             echo "-------------------------request end-----------------------\n";
         }
@@ -94,7 +103,7 @@ class CurlTransport extends Transport {
         }
 
         $jsonOut = json_decode(trim($out), true);
-        if (empty($jsonOut)) {
+        if ($jsonOut === NULL) {
             $e = new TransportException("invalid JSON response: ".$out, $code);
             $e->rawResult = $out;
             throw $e;
