@@ -19,7 +19,7 @@ class Zone extends DataObject {
 
     protected $config = NULL;
 
-    protected $zone = NULL;
+    public $zone = NULL;
 
     protected $rest = NULL;
 
@@ -35,10 +35,12 @@ class Zone extends DataObject {
             return NULL;
         $rtype = strtoupper(substr($name, strpos($name, '_') + 1));
         $domain = $args[0];
+        $options = array();
         if (sizeof($args) > 1) {
             $options['answers'] = $args[1];
         }
-        $rec = new Record($domain, $rtype, $options);
+        $rec = new Record($this->config, $this, $domain, $rtype);
+        $rec->create($options);
         return $rec;
     }
 
@@ -57,6 +59,7 @@ class Zone extends DataObject {
 
     public function delete() {
         $this->rest->delete($this->zone);
+        $this->data = array();
     }
 
     public function update($options) {
@@ -73,8 +76,8 @@ class Zone extends DataObject {
         return $this;
     }
 
-    public function loadRecord($domain, $type, $options) {
-        $rec = new Record($domain, $type);
+    public function loadRecord($domain, $type) {
+        $rec = new Record($this->config, $this, $domain, $type);
         $rec->load();
         return $rec;
     }
@@ -88,6 +91,9 @@ class Zone extends DataObject {
         $stats = new Stats($this->config);
         return $stats->usage($this->zone);
     }
+
+    // linkRecord(existing_domain, new_domain, rtype)
+    // cloneRecord(existing_domain, new_domain, rtype, zone)
 
 }
 

@@ -13,6 +13,8 @@ $nsone = new Client();
 //$nsone->config['verbosity'] = 5;
 //$nsone->config->dump();
 
+// rest wrapper
+/*
 $records = $nsone->records();
 print_r($records->retrieve('test.com', 'asdf.test.com', 'A'));
 
@@ -31,4 +33,9 @@ print_r($records->delete('test.com', 'newrec.test.com', 'MX'));
 print_r($records->create('test.com', 'newrec.test.com', 'A', 
     array('answers' => array(array('answer' => ['1.2.3.4'], 'meta' => array('up' => true))))));
 print_r($records->delete('test.com', 'newrec.test.com', 'A'));
+*/
 
+// high level interface
+$zone = $nsone->createZone('newzone3.com');
+$zone->add_A('record', '1.2.3.4');
+$zone->delete();

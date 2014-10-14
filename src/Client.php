@@ -59,7 +59,7 @@ class Client
         return $zoneH;
     }
 
-    public function createZone($zone, $options) {
+    public function createZone($zone, $options=array()) {
         $zoneH = new Zone($this->config, $zone);
         $zoneH->create($options);
         return $zoneH;
