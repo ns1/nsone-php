@@ -47,7 +47,7 @@ class Zones extends BaseResource {
         return $this->makeRequest('GET', $url);
     }
 
-    public function retrieve($zone=NULL) {
+    public function retrieve($zone) {
         $url = sprintf('%s/%s', self::ROOT, $zone);
         return $this->makeRequest('GET', $url);
     }

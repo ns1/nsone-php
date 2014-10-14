@@ -38,6 +38,9 @@ class Client
     public function zones() {
         return new Rest\Zones($this->config);
     }
+    public function records() {
+        return new Rest\Records($this->config);
+    }
 
 }
 
