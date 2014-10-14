@@ -17,10 +17,29 @@ class BaseResource {
 
     static protected $transport = NULL;
 
+    protected $INT_FIELDS = array();
+    protected $BOOL_FIELDS = array();
+    protected $PASSTHRU_FIELDS = array();
+
     public function __construct(\NSONE\Config $config) {
         $this->config = $config;
         if (self::$transport == NULL)
             self::$transport = new CurlTransport($this->config);
+    }
+
+    public function buildStdBody($body, $fields) {
+        foreach ($this->BOOL_FIELDS as $f) {
+            if (isset($fields[$f]))
+                $body[$f] = (bool)$fields[$f];
+        }
+        foreach ($this->INT_FIELDS as $f) {
+            if (isset($fields[$f]))
+                $body[$f] = (int)$fields[$f];
+        }
+        foreach ($this->PASSTHRU_FIELDS as $f) {
+            if (isset($fields[$f]))
+                $body[$f] = $fields[$f];
+        }
     }
 
     protected function addArgs($url, $args) {

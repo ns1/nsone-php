@@ -35,6 +35,9 @@ class Client
     public function stats() {
         return new Rest\Stats($this->config);
     }
+    public function zones() {
+        return new Rest\Zones($this->config);
+    }
 
 }
 
