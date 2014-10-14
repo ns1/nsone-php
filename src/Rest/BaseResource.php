@@ -23,6 +23,22 @@ class BaseResource {
             self::$transport = new CurlTransport($this->config);
     }
 
+    protected function addArgs($url, $args) {
+        if (!is_array($args))
+            return $url;
+        $sep = NULL;
+        foreach ($args as $k => $v) {
+            if (!$sep) {
+                $url .= '?'.$k.'='.urlencode($v);
+                $sep = '&';
+            }
+            else {
+                $url .= $sep.$k.'='.urlencode($v);
+            }
+        }
+        return $url;
+    }
+
     protected function makeUrl($path) {
         return $this->config->getEndpoint() . $path;
     }

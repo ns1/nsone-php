@@ -78,12 +78,11 @@ class CurlTransport extends Transport {
 
         if (@$this->config['verbosity'] > 2) {
             $data = curl_getinfo($curl, CURLINFO_HEADER_OUT);
-            $outHeaders = print_r($options['headers'], true);
-            echo "---------------------------send-------------------------\n";
-            //echo "OUT HEADERS: [$outHeaders]\n";
+            $data = preg_replace('/X-NSONE-Key: (.+)$/m', 'X-NSONE-Key: <redacted>', $data);
+            echo "---------------------------request start-------------------------\n";
             echo "WRITE: [$data]\n";
             echo "READ : [$this->readBuf]\n";
-            echo "-------------------------end send-----------------------\n";
+            echo "-------------------------request end-----------------------\n";
         }
 
         $error = curl_error($curl);
