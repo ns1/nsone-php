@@ -36,9 +36,46 @@ Then in your project, make sure you require the composer autoloader:
 require 'vendor/autoload.php';
 ```
 
-### Install (Manual):
-
 ### Create config file
+
+For example, nsone.json
+
+```javascript
+{
+   "default_key": "account1",
+   "verbosity": 5,
+   "keys": {
+        "account1": {
+            "key": "qACMD09OJXBxT7XOuRs8",
+            "desc": "account number 1"
+        },
+        "account2": {
+            "key": "qACMD09OJXBxT7XOwv9v",
+            "desc": "account number 2"
+        },
+   }
+}
+```
 
 ### Connect
 
+```php
+require 'vendor/autoload.php';
+
+use NSONE\Client;
+use NSONE\Config;
+
+$config = new Config();
+$config->loadFromFile('nsone.json');
+
+$nsone = new Client(array('config' => $config));
+
+$zone = $nsone->createZone('newzone2.com', array('nx_ttl' => 100));
+$zone->update(array('nx_ttl' => 200));
+print_r($zone->qps());
+print_r($zone->usage());
+$zone->delete();
+
+$zone = $nsone->loadZone('test.com');
+print_r($zone->qps());
+```
