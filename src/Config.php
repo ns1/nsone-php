@@ -78,15 +78,6 @@ class Config extends DataObject
 
     }
 
-    protected function getData($key, $default=NULL) {
-
-        if (isset($this->data[$key]))
-            return $this->data[$key];
-        else
-            return $default;
-    
-    }
-
     public function getKeyConfig($keyID=NULL) {
 
         if (empty($keyID))

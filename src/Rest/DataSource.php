@@ -22,19 +22,19 @@ class DataSource extends BaseResource {
         return $this->makeRequest('GET', $url);
     }
 
-    public function create($name, $sourcetype, $options) {
+    public function create($name, $sourcetype, $options=array()) {
         $body = array(
-            'name': $name,
-            'sourcetype': $sourcetype,
+            'name' => $name,
+            'sourcetype' => $sourcetype,
         );
         $this->buildStdBody($body, $options);
         $url = sprintf('%s', self::ROOT);
         return $this->makeRequest('PUT', $url, $body);
     }
 
-    public function update($sourceid, $options) {
+    public function update($sourceid, $options=array()) {
         $body = array(
-            'id': $sourceid,
+            'id' => $sourceid,
         );
         $this->buildStdBody($body, $options);
         $url = sprintf('%s/%s', self::ROOT, $sourceid);

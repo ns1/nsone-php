@@ -13,7 +13,17 @@ class DataObject implements \ArrayAccess
 
     protected $data = array();
 
-    public function __construct() { }
+    public function __construct() {
+    }
+
+    public function getData($key=NULL, $default=NULL) {
+        if (empty($key))
+            return $ths->data;
+        if (isset($this->data[$key]))
+            return $this->data[$key];
+        else
+            return $default;
+    }
 
     public function dump($return=false) {
         print_r($this->data, $return);

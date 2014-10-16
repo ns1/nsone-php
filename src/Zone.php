@@ -35,9 +35,9 @@ class Zone extends DataObject {
             return NULL;
         $rtype = strtoupper(substr($name, strpos($name, '_') + 1));
         $domain = $args[0];
-        $options = array();
-        if (sizeof($args) > 1) {
-            $options['answers'] = $args[1];
+        $options['answers'] = $args[1];
+        if (sizeof($args) == 3) {
+            $options = array_merge($options, $args[2]);
         }
         $rec = new Record($this->config, $this, $domain, $rtype);
         $rec->create($options);

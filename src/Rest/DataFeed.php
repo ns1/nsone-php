@@ -27,10 +27,10 @@ class DataFeed extends BaseResource {
         return $this->makeRequest('GET', $url);
     }
 
-    public function create($sourceid, $name, $config, $options) {
+    public function create($sourceid, $name, $config, $options=array()) {
         $body = array(
-            'name': $name,
-            'config': $config,
+            'name' => $name,
+            'config' => $config,
         );
         $this->buildStdBody($body, $options);
         $url = sprintf('%s/%s', self::ROOT, $sourceid);
@@ -39,7 +39,7 @@ class DataFeed extends BaseResource {
 
     public function update($sourceid, $feedid, $options) {
         $body = array(
-            'id': $feedid,
+            'id' => $feedid,
         );
         $this->buildStdBody($body, $options);
         $url = sprintf('%s/%s/%s', self::ROOT, $sourceid, $feedid);

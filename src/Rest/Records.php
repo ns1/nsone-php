@@ -72,18 +72,16 @@ class Records extends BaseResource {
         $realFilters = array();
         if (!is_array($filters))
             throw new \Exception('filter argument must be an array of arrays');
-        foreach ($filters as $f) {
-            if (!is_array($f))
+        foreach ($filters as $f_key => $f_val) {
+            if (!is_array($f_val))
                 throw new \Exception('filter items must be dict');
-            if (isset($f['filter'])) {
+            if (isset($f_val['filter'])) {
                 # full
-                $realFilters[] = $f;
+                $realFilters[] = $f_val;
             }
             else {
                 # simple, synthesize
-                $fname = key($f);
-                $fconfig = current($f);
-                $realFilters[] = array('filter' => $fname, 'config' => $fconfig);
+                $realFilters[] = array('filter' => $f_key, 'config' => (object)$f_val);
             }
         }
         return $realFilters;
@@ -96,8 +94,9 @@ class Records extends BaseResource {
         $body['type'] = strtoupper($type);
         if (isset($options['filters']))
             $body['filters'] = $this->getFiltersForBody($options['filters']);
-        if (isset($options['answers']))
+        if (isset($options['answers'])) {
             $body['answers'] = $this->getAnswersForBody($options['answers']);
+        }
         $this->buildStdBody($body, $options);
         if (isset($body['use_csubnet'])) {
             # key mapping
