@@ -2,3 +2,4 @@ phpunit.xml
 composer.phar
 composer.lock
 vendor/
+code-coverage/
