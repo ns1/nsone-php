@@ -204,24 +204,4 @@ class ZoneTest extends \PHPUnit_Framework_TestCase {
 
 	}
 
-	/**
-	 *
-	 */
-	public function testSkipped() {
-
-		$this->markTestSkipped(
-			'skipping this test'
-		);
-	}
-
-	/**
-	 *
-	 */
-	public function testIncomplete() {
-
-		$this->markTestIncomplete(
-        'This test has not been implemented yet.'
-     );
-
-	}
 }
