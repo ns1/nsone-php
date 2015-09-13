@@ -34,7 +34,7 @@ class Record extends DataObject {
 
 
     public function reload() {
-        $this->load(true);
+        return $this->load(true);
     }
 
     public function load($reload=false) {

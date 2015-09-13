@@ -18,7 +18,7 @@ class DataObject implements \ArrayAccess
 
     public function getData($key=NULL, $default=NULL) {
         if (empty($key))
-            return $ths->data;
+            return $this->data;
         if (isset($this->data[$key]))
             return $this->data[$key];
         else
@@ -26,13 +26,13 @@ class DataObject implements \ArrayAccess
     }
 
     public function dump($return=false) {
-        print_r($this->data, $return);
+        return print_r($this->data, $return);
     }
-    
+
     public function offsetSet($offset, $value) {
         $this->data[$offset] = $value;
     }
-    
+
     public function offsetExists($offset) {
         return isset($this->data[$offset]);
     }
