@@ -1,0 +1,14 @@
+{
+   "default_key": "account1",
+   "verbosity": 5,
+   "keys": {
+        "account1": {
+            "key": "key_one",
+            "desc": "account number 1"
+        },
+        "account2": {
+            "key": "key_two",
+            "desc": "account number 2"
+        }
+   }
+}

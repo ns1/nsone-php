@@ -35,12 +35,21 @@ class Config extends DataObject
     }
 
     protected function expandTilde($path) {
-        if (function_exists('posix_getuid') && strpos($path, '~') !== false) {
-            $info = posix_getpwuid(posix_getuid());
-            $path = str_replace('~', $info['dir'], $path);
-        }
 
+        $dir = null;
+        if (strpos($path, '~') !== false) {
+            if (function_exists('posix_getuid')) {
+                $info = posix_getpwuid(posix_getuid());
+                $dir = $info['dir'];
+            }
+            else {
+                $dir = getenv("HOME");
+            }
+        }
+        if ($dir)
+            $path = str_replace('~', $dir, $path);
         return $path;
+
     }
 
     public function loadFromFile($path=NULL) {
@@ -95,7 +104,7 @@ class Config extends DataObject
         if (!isset($this->data['keys'][$keyID]))
             throw new \Exception('keyID does not exist: ' . $keyID);
         $this->keyID = $keyID;
-    
+
     }
 
     public function getAPIKey($keyID=NULL) {
@@ -104,7 +113,7 @@ class Config extends DataObject
         if (!isset($apiKey['key']))
             throw new \Exception('invalid config: missing api key');
         return $apiKey['key'];
-    
+
     }
 
     public function getEndpoint() {
@@ -121,7 +130,7 @@ class Config extends DataObject
         else
             $endpoint = $this->data['endpoint'];
         return sprintf('https://%s%s/%s/', $endpoint, $port, $this->data['api_version']);
-    
+
     }
 
 }

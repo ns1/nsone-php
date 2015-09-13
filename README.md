@@ -52,7 +52,7 @@ For example, nsone.json
         "account2": {
             "key": "qACMD09OJXBxT7XOwv9v",
             "desc": "account number 2"
-        },
+        }
    }
 }
 ```
