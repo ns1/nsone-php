@@ -70,8 +70,7 @@ class Client
             $zone = substr($domain, strpos($domain, '.') + 1);
         }
         $zoneH = new Zone($this->config, $zone);
-        $zoneH->loadRecord($domain, $type);
-        return $zoneH;
+        return $zoneH->loadRecord($domain, $type);
     }
 
 }
