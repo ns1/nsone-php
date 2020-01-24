@@ -16,7 +16,7 @@ class Zones extends BaseResource {
     const ROOT = 'zones';
     
     public $INT_FIELDS = array('retry', 'refresh', 'expiry', 'nx_ttl');
-    public $PASSTHRU_FIELDS = array('secondary', 'hostmaster', 'meta', 'networks');
+    public $PASSTHRU_FIELDS = array('secondary', 'hostmaster', 'meta', 'networks', 'link');
 
     protected function buildBody($zone, $options) {
         $body = array();
