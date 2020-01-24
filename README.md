@@ -1,5 +1,6 @@
 About
 =====
+> This project is [inactive](https://github.com/ns1/community/blob/master/project_status/INACTIVE.md).
 
 This package provides a PHP SDK for accessing the NSONE DNS platform and includes both a simple NSONE REST API wrapper as well as a higher level interface for managing zones, records, data feeds, and more. 
 
@@ -79,3 +80,7 @@ $zone->delete();
 $zone = $nsone->loadZone('test.com');
 print_r($zone->qps());
 ```
+
+Contributions
+---
+Pull Requests and issues are welcome. See the [NS1 Contribution Guidelines](https://github.com/ns1/community) for more information.
