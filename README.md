@@ -1,6 +1,9 @@
 About
 =====
-> This project is [inactive](https://github.com/ns1/community/blob/master/project_status/INACTIVE.md).
+> Please note:
+> **At this time, the `NS1 PHP` package is [DEPRECATED](https://github.com/ns1/community/blob/master/project_status/DEPRECATED.md) and is
+> not feature complete. We suggest using one of our other packages for
+> production integrations.**
 
 This package provides a PHP SDK for accessing the NSONE DNS platform and includes both a simple NSONE REST API wrapper as well as a higher level interface for managing zones, records, data feeds, and more. 
 
